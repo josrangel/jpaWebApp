@@ -1,0 +1,12 @@
+html { 
+  text-align: center;
+  
+}
+body {display: inline-block; text-align: left}
+footer {font-size: small; text-align: center}
+input[type="submit"], input[type="button"] {
+   color: darkblue; border: none; cursor: pointer
+}
+.herramientas {}
+.info {display: block; color: blue}
+.error {display: block; color: red}

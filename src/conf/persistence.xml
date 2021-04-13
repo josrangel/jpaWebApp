@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Aquí se define la conexión a BD. -->
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence                http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <!-- unit-name: nombre de la configuraciòn.
+       trandsacion-type: Tipo de transacción, JTA significa que usa transacciones
+                         distribuidas.  -->
+  <persistence-unit name="jsf04bdPU" transaction-type="JTA">
+    <!-- Nombre del pool de conexiones dentro del servidor. -->
+    <jta-data-source>java:comp/DefaultDataSource</jta-data-source>
+    <!-- Utiliza las clases entity definidas en el módulo. -->
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <!-- Crea las tablas al instalar la aplicación en el servidor. -->
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

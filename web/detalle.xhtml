@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- Copyright 2021 josrangel
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+language governing permissions and limitations under the License.-->
+<!--
+VALIDACIÓN DE DATOS.
+
+Es muy importante asegurar que los datos sean correctos. Tanto el navegador, como el
+servidor web pueden validar los campos de captura.
+
+Los campos de captura de html5 tienen atributos que permiten validar.
+
+Los resultados de las validaciones en el servidor se muestran con los elementos
+h:messages y h:message.
+
+La validación en el servidor no puede faltar porque evita trabajar con datos
+incorrectos. Por otro lado, la validación en el navegador evita tener que esperar para
+darse cuenta que los datos están mal.
+
+Este ejemplo calcula una fórmula que depede de los valores "x" y "f". Para que la
+página luzca bien, en el encabezado se muestra una imagen con la fórmula en formato
+matemático. En caso de que no se pueda desplegar la imagen y en el título, se muestra
+un texto lo mejor formateado posible.
+
+h:message se usa en este ejemplo para los mensajes asociados con los valores "x" y
+"f".
+
+h:messages se usa en este ejemplo para mostrar los mensajes que son resultados de un
+cálculo, así como mensajes que no están asociados exclusivamente con "x" o con "f".
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <ui:param name="título" value="#{ctrlConocido.nuevo
+                                   ? 'Nuevo Conocido' : ctrlConocido.modelo.nombre}"/>
+  <h:head>
+    <meta charset="UTF-8" />
+    <title>Registro Curso</title>
+    <meta name="viewport" content="width=device-width" />
+    
+    <link jsf:name="css/estilos.css"/>
+    <style>
+      label {display: block} 
+    </style>
+  </h:head>
+  <h:body>
+    <h1>Registro Curso</h1>
+    <form jsf:prependId="false">
+      <div class="herramientas">
+        <input type="submit" value="Guardar" accesskey="G"
+               jsf:action="#{ctrlConocido.guarda()}"/>
+        <input type="button" value="Cancelar" accesskey="C" jsf:outcome="index"/>
+      </div>
+      <h:messages globalOnly="true" layout="table" infoClass="info"
+                  errorClass="error"/>
+      <p>
+        <ui:param name="lblNombre" value="Nombre"/>
+        <label jsf:for="nombre" accesskey="N">
+          #{lblNombre}
+        </label>
+        <input jsf:id="nombre" type="text" jsf:label="#{lblNombre}" maxlength="255"
+               size="25" placeholder="1 a 255 caracteres"
+               jsf:value="#{ctrlConocido.modelo.nombre}"/>
+        <h:message for="nombre" infoClass="info" errorClass="error"/>
+      </p>
+      <p>
+        <ui:param name="lblCurso" value="Curso"/>
+        <label for="direccion" accesskey="C">
+          #{lblCurso}
+        </label>
+        <input jsf:id="direccion" type="text" jsf:label="#{lblCurso}"
+               maxlength="255" size="25" placeholder="1 a 255 caracteres"
+               jsf:value="#{ctrlConocido.modelo.curso}"/>
+        <h:message for="direccion" infoClass="info" errorClass="error"/>
+      </p>
+      <p>
+        <ui:param name="lblSalon" value="Salon"/>
+        <label for="salon" accesskey="S">
+          #{lblSalon}
+        </label>
+        <input jsf:id="salon" type="text" jsf:label="#{lblSalon}"
+               maxlength="255" size="25" placeholder="1 a 255 caracteres"
+               jsf:value="#{ctrlConocido.modelo.salon}"/>
+        <h:message for="salon" infoClass="info" errorClass="error"/>
+      </p>
+      <p>
+        <ui:param name="lblTelefono" value="Teléfono"/>
+        <label jsf:for="telefono" accesskey="T">
+          #{lblTelefono}
+        </label>
+        <input jsf:id="telefono" type="tel" jsf:label="#{lblTelefono}" maxlength="14"
+               size="17" placeholder="8 a 14 dígitos"
+               jsf:value="#{ctrlConocido.modelo.telefono}"/>
+        <h:message for="telefono" infoClass="info" errorClass="error"/>
+      </p>
+      <p>
+        <ui:param name="lblFecha" value="Fecha"/>
+        <label jsf:for="fecha" accesskey="T">
+          #{lblFecha}
+        </label>
+        <input jsf:id="fecha" type="date" required="required" jsf:label="#{lblFecha}" 
+               maxlength="10"
+               size="13" pattern="[0-3]\d/[01]\d/\d{4}" placeholder="dia/mes/año"
+               jsf:value="#{ctrlConocido.modelo.fecha}">
+          <f:convertDateTime type="time" pattern="yyyy-MM-dd" locale="es-MX"
+                             timeZone="America/Mexico_City"/>
+        </input>
+        <h:message for="fecha" infoClass="info" errorClass="error"/>
+      </p>
+    </form>
+    <footer>
+      Copyright © 2021 josrangel
+    </footer>
+  </h:body>
+</html>

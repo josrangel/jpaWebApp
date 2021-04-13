@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- Ejemplo de acceso a bases de datos y aplicaciones de varias páginas. Es solo una
+introducción. Está elaborado de una manera muy simple, pero que tiene duplicidad de
+código. Propón que se puede hacer para mejorar el uso de la aplicación y evitar
+repetir código. -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <ui:param name="título" value="Conocidos"/>
+  <h:head>
+    <meta charset="UTF-8" />
+    <title>Registro Curso</title>
+    <meta name="viewport" content="width=device-width" />
+    
+    <link jsf:name="css/estilos.css"/>
+  </h:head>
+  <h:body>
+    <h1>Registro Curso</h1>
+    <form jsf:prependId="false">
+      <div class="herramientas">
+        <!-- Botón que abre una página de JSF. -->
+        <input type="button" value="Nuevo..." accesskey="N" jsf:outcome="detalle"/>
+      </div>
+      <h:messages globalOnly="true" layout="table" infoClass="info"
+                  errorClass="error"/>
+      <!-- Tabla que muestra los conocidos registrados. -->
+      <h:dataTable var="it" value="#{ctrlConocidos.instancias}">
+        <h:column>
+          <f:facet name="header">Nombre</f:facet>
+          <a jsf:outcome="detalle">
+            <f:param name="id" value="#{it.id}"/>
+            #{it.nombre}
+          </a>
+        </h:column>
+        <h:column>
+          <f:facet name="header">Curso</f:facet>
+            #{it.curso}
+        </h:column>
+        <h:column>
+          <f:facet name="header">Salon</f:facet>
+            #{it.salon}
+        </h:column>
+        <h:column>
+          <f:facet name="header">Teléfono</f:facet>
+            #{it.telefono}
+        </h:column>
+        <h:column>
+          <f:facet name="header">Fecha</f:facet>
+          <h:outputText value="#{it.fecha}">
+            <f:convertDateTime type="date" timeStyle="full" locale="es-MX"
+                               timeZone="America/Mexico_City"/>
+          </h:outputText>
+        </h:column>
+        <h:column>
+          <input type="button" value="Editar" jsf:outcome="detalle">
+            <f:param name="id" value="#{it.id}"/>
+          </input>
+          <input type="submit" value="Eliminar"
+                 jsf:action="#{ctrlConocidos.elimina(it)}"/>
+        </h:column>
+      </h:dataTable>
+    </form>
+    <footer>
+      Copyright © 2021 Rangel Cuevas Josue Roberto
+    </footer>
+  </h:body>
+</html>
